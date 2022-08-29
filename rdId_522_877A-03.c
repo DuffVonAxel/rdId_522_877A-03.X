@@ -21,7 +21,8 @@
 #include "mfrc522_v01.h"
 
 char key[6] = {0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF};
-char writeData[]={"Duff Von Axel"};// 
+//char writeData[]={"Duff Von Axel"};// 
+char writeData[]={"_____________"};// 
 
 /* Teste funcional */
 //void main(void)
@@ -211,7 +212,7 @@ void main()
 				lcdCaracter(h+'0',3,17);
 				lcdCaracter(j+'0',3,18);
 //			if (MFRC522_Auth(PICC_AUTHENT1A, 7, key, UID) == 0)
-			if (h == 0)
+			if (h == 0)						// Se ==0 teste de gravacao Se ==10 testa leitura.
 			{
 				//Escreve algo no bloco 4
 				i=MFRC522_Write(4, writeData);
@@ -229,7 +230,8 @@ void main()
 			}
 				/**/
 			//Faz a leitura do bloco 4
-			for(i=0;i<16;i++) writeData[i]='+'; // Limpa mem p/ teste
+			for(i=0;i<13;i++) writeData[i]=0x30; // Limpa mem p/ teste
+			lcdTexto(writeData, 1, 1);
 			
 			i=MFRC522_Read(4, writeData);
 			lcdCaracter(i+'0',4,20);
